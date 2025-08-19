@@ -1,0 +1,64 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master.master.cs" Inherits="Paginas.Master" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <style>
+            .botones {
+                background-color: #6495ED; /* cornflowerblue */
+                color: white;
+                border: 1px solid #417dc4;
+                padding: 5px 12px;
+                border-radius: 4px;
+                text-align: center;
+                text-decoration: none;
+            }
+        </style>
+        <!-- Comienzo del navbar -->
+
+        <nav class="navbar" style="background-color: cornflowerblue;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#" style="color: white;">
+                    <img src="https://png.pngtree.com/template/20191219/ourlarge/pngtree-technology-shop-logo-designs-online-shop-logo-digital-logo-template-vector-image_341564.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    TechShop 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Flag_of_Argentina.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                </a>
+                <div class="d-flex align-items-center">
+                    <%if (Session["Usuario"] is null)
+                        { %>
+                    <asp:Button Text="Ingresar" CssClass="botones btn-sm me-2" ID="btnLogin" CausesValidation="false" OnClick="btnLogin_Click" runat="server" />
+                    <asp:Button Text="Crear cuenta" CssClass="botones btn-sm me-2" OnClick="btnCrearCuenta_Click" ID="btnCrearCuenta" runat="server" />
+                    <!--Se agregó CausesValidation al btn de abajo ya que no me dejaba redireccionar al inicio ya que tiene RequiredFieldValidator -->
+                    <asp:Button Text="Inicio" CssClass="botones btn-sm me-2" ID="btnInicio" CausesValidation="false" OnClick="btnInicio_Click" runat="server" />
+                    <%  } %>
+                    <%else
+                        { %>
+                    <asp:Label Text="" ID="lblUsuarioBienvenida" CssClass="stronger fw-bold text-white me-3" runat="server" />
+                    <asp:Button Text="Favoritos" CssClass="botones btn-sm me-2" ID="btnFavoritos" OnClick="btnFavoritos_Click" runat="server" />
+                    <asp:Button Text="Inicio" CssClass="botones btn-sm me-2" ID="btnInicioFavorito" Visible="false" OnClick="btnInicioFavorito_Click" runat="server" />
+                    <asp:Button Text="Admin" CssClass="botones btn-sm me-2" ID="btnAdmin" Visible="false" OnClick="btnAdmin_Click" runat="server" />
+                    <asp:Button Text="Cerrar sesión" CssClass="botones btn-sm me-2" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" runat="server" />
+
+
+                    <%   } %>
+
+            </div>
+        </nav>
+        <!-- Cierre del Navbar -->
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
